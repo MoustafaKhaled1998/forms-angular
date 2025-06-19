@@ -1,0 +1,21 @@
+<div class="container">
+  <div class="Title">
+    <h3>Products</h3>
+    <div class="btnGroup">
+      <button (click)="showLogin()">Login</button>
+      <button (click)="showRegister()">Register</button>
+    </div>
+  </div>
+
+  @if (isLoginShowen) {
+    <div class="form-wrapper">
+      <app-login></app-login>
+    </div>
+  }
+
+  @if (isRegisterShowen) {
+    <div class="form-wrapper">
+      <app-register></app-register>
+    </div>
+  }
+</div>

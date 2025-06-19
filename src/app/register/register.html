@@ -1,0 +1,74 @@
+<div class="wrapper">
+    <h2 class="title">Register</h2>
+    <form [formGroup]="myForm" (ngSubmit)="submit()" class="container">
+        <div class="form-field">
+            <label>Name</label>
+            <input type="text" formControlName="name" />
+            @if(myForm.get('name')?.touched && myForm.get('name')?.errors){
+            @if(myForm.get('name')?.getError('required')){
+            <small>This Field is Required</small>
+            } @if(myForm.get('name')?.getError('minlength')){
+            <small>Minmum length should be 3 charecters</small>
+            }
+            }
+        </div>
+
+        <div class="form-field">
+            <label>Email</label>
+            <input type="text" formControlName="email" />
+
+            @if(myForm.get('email')?.touched && myForm.get('email')?.errors){
+            @if(myForm.get('email')?.getError('required')){
+            <small>This Field is Required</small>
+            } @if(myForm.get('email')?.getError('pattern')){
+            <small>This Email format is invalid</small>
+            }
+            }
+        </div>
+
+        <div class="form-field">
+            <label>Username</label>
+            <input type="text" formControlName="username" />
+            @if(myForm.get('username')?.touched && myForm.get('username')?.errors){
+            @if(myForm.get('username')?.getError('required')){
+            <small>This Field is Required</small>
+            } @if(myForm.get('username')?.getError('minlength')){
+            <small>Minmum length should be 3 charecters</small>
+            }@if(myForm.get('username')?.getError('noSpace')){
+            <small>Spaces are not allowed</small>
+            }
+            }
+        </div>
+
+        <div class="form-field">
+            <label>Password</label>
+            <input type="password" formControlName="password" />
+            @if(myForm.get('password')?.touched && myForm.get('password')?.errors){
+            @if(myForm.get('password')?.getError('required')){
+            <small>This Field is Required</small>
+            } @if (myForm.get('password')?.getError('noSpace')) {
+            <small>Spaces are not allowed</small>
+            } @if(myForm.get('password')?.getError('pattern')){
+            <small>
+                Password must:
+                <ul>
+                    <li>Be at least 8 characters</li>
+                    <li>Include uppercase, lowercase, number, and special character</li>
+                </ul>
+            </small>
+            }
+            }
+        </div>
+
+        <div class="form-field">
+            <label>Confirm Password</label>
+            <input type="password" formControlName="confirmPassword" />
+
+            @if(myForm.get('confirmPassword')?.touched && myForm.errors?.['passwordsMismatch']){
+            <small>The Passwords do not match</small>
+            }
+        </div>
+
+        <button [disabled]="!myForm.valid">Submit</button>
+    </form>
+</div>

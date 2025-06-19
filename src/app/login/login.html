@@ -1,0 +1,38 @@
+<div class="wrapper">
+        <h2 class="title">Login</h2>
+<form #myForm="ngForm" (ngSubmit)="submit(myForm)" class="container">
+
+  <div class="form-field">
+    <label>Email</label>
+    <input type="email"
+        pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
+        required ngModel #email="ngModel" name="email"/>
+    @if(email.touched && email.errors){
+        
+        @if(email.getError('required')){
+          <small>This Field is Required</small>
+        }
+        @if(email.getError('pattern')){
+          <small>This email is not a valid format</small>
+        }
+      }
+  </div>
+
+    <div class="form-field">
+    <label>Password</label>
+    <input type="password" required minlength="5" ngModel #name="ngModel" name="name"/>
+      @if(name.touched && name.errors){
+        
+        @if(name.getError('required')){
+          <small>This Field is Required</small>
+        }
+        @if(name.getError('minlength')){
+          <small>This Field must be more than 4 letters</small>
+        }
+      }
+    
+  </div>
+
+  <button [disabled]="!myForm.valid">Submit</button>
+</form>
+</div>
